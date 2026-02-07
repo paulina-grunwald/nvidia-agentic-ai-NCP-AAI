@@ -2,7 +2,6 @@
 
 Exam notes and study resources for the [NVIDIA Agentic AI Professional Certification](https://www.nvidia.com/en-us/learn/certification/agentic-ai-professional/).
 
-
 ## Study Notes by Domain
 
 ### 1. Agent Architecture and Design
@@ -18,4 +17,6 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 ### 2. Agent Development
 
 ## NVIDIA-Specific Technologies
+
 - [Triton Inference Server](nvidia/triton-inference-server.md)
+- [Throughput vs Latency](nvidia/throughput-vs-latency)
