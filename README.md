@@ -19,4 +19,5 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 ## NVIDIA-Specific Technologies
 
 - [Triton Inference Server](nvidia/triton-inference-server.md)
-- [Throughput vs Latency](nvidia/throughput-vs-latency)
+- [Throughput vs Latency](nvidia/throughput-vs-latency.md)
+- [Difference between NIM and Nemo](nvidia/nim-vs-nemo.md)
