@@ -10,6 +10,7 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 - [4 Layer Agent Architecture](01-agent-architecture-and-design/4-layer-agent-architecture.md)
 - [Agentic Lifecycles](01-agent-architecture-and-design/agentic-lifecycles.md) — how agents perceive, think, and act
 - [Reasoning Patterns](01-agent-architecture-and-design/reasoning-patterns.md)
+- [Difference between ReAct and Chain of thought](01-agent-architecture-and-design/ReAct-vs-CoT.md)
 - [Error Handling](01-agent-architecture-and-design/error-handling.md)
 - [Scalability & Adaptability](01-agent-architecture-and-design/scalability-and-adaptability.md)
 - [Governance & Safety Controls](01-agent-architecture-and-design/governance-and-safety-controls.md)
@@ -21,3 +22,7 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 - [Triton Inference Server](nvidia/triton-inference-server.md)
 - [Throughput vs Latency](nvidia/throughput-vs-latency.md)
 - [Difference between NIM and Nemo](nvidia/nim-vs-nemo.md)
+
+
+### Definitions
+- [Definitions](cheatsheets/definitions.md)
