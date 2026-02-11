@@ -17,12 +17,18 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 
 ### 2. Agent Development
 
+
 ## NVIDIA-Specific Technologies
 
 - [Triton Inference Server](nvidia/triton-inference-server.md)
 - [Throughput vs Latency](nvidia/throughput-vs-latency.md)
 - [Difference between NIM and Nemo](nvidia/nim-vs-nemo.md)
 
-
 ### Definitions
+
 - [Definitions](cheatsheets/definitions.md)
+
+
+### 7. RAG
+
+- [RAG](07-rag-and-tools/rag-and-tools.md)
