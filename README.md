@@ -17,6 +17,7 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 
 ### 2. Agent Development
 
+- [RAG](02-agent-development/rag.md)
 
 ## NVIDIA-Specific Technologies
 
@@ -28,7 +29,6 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 
 - [Definitions](cheatsheets/definitions.md)
 
+### Terms
 
-### 7. RAG
-
-- [RAG](07-rag-and-tools/rag-and-tools.md)
+- [Terms](/terms.md)
