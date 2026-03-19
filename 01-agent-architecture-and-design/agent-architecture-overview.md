@@ -159,7 +159,7 @@ A layered reactive architecture where lower-priority behaviors can be suppressed
 
 An agent architecture that uses **internal reasoning, planning, and memory** to achieve goals through a deliberate decision-making process.
 
- The Deliberative Cycle
+### The Deliberative Cycle
 
 ```mermaid
 graph TD
@@ -195,7 +195,8 @@ Answer: The weather in San Francisco is currently 18C and cloudy. There's a 75%
 chance of precipitation with rain expected in 2 hours, so yes, you should definitely
 bring an umbrella.
 ```
-Key Characteristics
+
+### Key Characteristics
 
 - Interleaved thinking and acting - doesn't plan everything upfront
 - Observes results before next step - adapts based on what happens

@@ -1,0 +1,16 @@
+## Suggested Reading
+
+- [Agentic AI in the Factory - NVIDIA White Paper](https://docs.nvidia.com/ai-enterprise/planning-resource/ai-factory-white-paper/latest/agentic-ai-in-the-factory.html)
+- [Building Autonomous AI with NVIDIA Agentic NeMo](https://medium.com/@zbabar/building-autonomous-ai-with-nvidia-agentic-nemo-e2992ae58cea)
+- [Three Building Blocks for AI Virtual Assistants with NIM](https://developer.nvidia.com/blog/three-building-blocks-for-creating-ai-virtual-assistants-for-customer-service-with-an-nvidia-nim-agent-blueprint/)
+- [arXiv: Agentic AI Research](https://arxiv.org/abs/2502.05439)
+- [arXiv PDF](https://arxiv.org/pdf/2502.05439)
+- [Multi-Agent Framework for Financial Fraud Detection](https://medium.com/@mariaprokofieva/catch-me-if-you-can-a-multi-agent-framework-for-financial-fraud-detection-03faa7caba7c)
+- [NVIDIA Glossary: Multi-Agent Systems](https://www.nvidia.com/en-us/glossary/multi-agent-systems/)
+- [How to Make Your LLM More Accurate with RAG & Fine-Tuning](https://towardsdatascience.com/how-to-make-your-llm-more-accurate-with-rag-fine-tuning/)
+- [YouTube: Related Video](https://www.youtube.com/watch?v=DHliLLeQgPI)
+- [NVIDIA Certified Associate - Generative AI & LLMs](https://www.whizlabs.com/blog/nvidia-certified-associate-generative-ai-llms/)
+- [DeepLearning.AI: NVIDIA NAT - Making Agents Reliable](https://www.deeplearning.ai/short-courses/nvidia-nat-making-agents-reliable/)
+- [RAG Pipelines Guide](https://orq.ai/blog/rag-pipelines)
+- [NVIDIA NAT Course: Introduction](https://learn.deeplearning.ai/courses/nvidia-nat-making-agents-reliable/lesson/rmy8gb/introduction)
+- [NVIDIA Agentic AI Certification Study Guide](https://nvdam.widen.net/s/zvkhwfqllc/nvt-study-guide-new-agentic-ai-cert-exam-4230000)

@@ -12,3 +12,5 @@
 - __Inference performance__ how FAST the model responds
 - __Reasoning performance__ = how WELL the model thinks
 - __Ground truth__ - it is the verified, correct answer or reference standard used to evaluate AI system performance. Think of it as the "answer key" against which you measure your model's predictions.
+
+- __Overfitting__ - occurs when a machine learning model learns training data too well, capturing noise and specific fluctuations rather than general patterns. This results in excellent performance on training data but poor, unreliable predictions on new, unseen data in production.

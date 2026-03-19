@@ -8,27 +8,37 @@ Exam notes and study resources for the [NVIDIA Agentic AI Professional Certifica
 
 - [Agent Architecture Overview](01-agent-architecture-and-design/agent-architecture-overview.md) — reactive, deliberative, hybrid, learning, multi-agent, tool-augmented architectures
 - [4 Layer Agent Architecture](01-agent-architecture-and-design/4-layer-agent-architecture.md)
-- [Agentic Lifecycles](01-agent-architecture-and-design/agentic-lifecycles.md) — how agents perceive, think, and act
-- [Reasoning Patterns](01-agent-architecture-and-design/reasoning-patterns.md)
-- [Difference between ReAct and Chain of thought](01-agent-architecture-and-design/ReAct-vs-CoT.md)
+- [Reasoning Patterns](01-agent-architecture-and-design/reasoning-patterns.md) — ReAct, CoT, Tree of Thoughts, Self-Reflection
 - [Error Handling](01-agent-architecture-and-design/error-handling.md)
-- [Scalability & Adaptability](01-agent-architecture-and-design/scalability-and-adaptability.md)
-- [Governance & Safety Controls](01-agent-architecture-and-design/governance-and-safety-controls.md)
 
-### 2. Agent Development
+### 7. RAG and Tools
 
-- [RAG](02-agent-development/rag.md)
+- [RAG and Tools](07-rag-and-tools/rag-and-tools.md) — embeddings, routers, chunking, retrieval methods, vector DBs, evaluation, advanced RAG patterns
 
 ## NVIDIA-Specific Technologies
 
 - [Triton Inference Server](nvidia/triton-inference-server.md)
+- [Triton Performance Analyzer](nvidia/triton-performance-analyzer.md)
 - [Throughput vs Latency](nvidia/throughput-vs-latency.md)
-- [Difference between NIM and Nemo](nvidia/nim-vs-nemo.md)
+- [NIM vs NeMo](nvidia/nim-vs-nemo.md)
+- [NIMs](nvidia/nims.md)
+- [NeMo](nvidia/nemo.md)
+- [NeMo Agent Toolkit](nvidia/nemo-agent-toolkit.md)
+- [AIQ Toolkit](nvidia/aiq-toolkit.md)
+- [Platform Components](nvidia/platform-components.md)
+- [Architecture Patterns](nvidia/architecture-patterns.md)
+- [Enterprise AI Factory](nvidia/enterprise-ai-factory.md)
+- [Enterprise Deployment Pattern](nvidia/enterprise-deployment-pattern.md)
+- [Evaluation and Tuning Techniques](nvidia/evaluation-and-tuning-techniques.md)
+- [NVIDIA Role in Ecosystem](nvidia/nvidia-role-in-ecosystem.md)
 
-### Definitions
+## Frameworks
 
-- [Definitions](cheatsheets/definitions.md)
+- [LangChain](frameworks/langchain.md)
+- [CrewAI](frameworks/crewai.md)
+- [AutoGen](frameworks/autogen.md)
 
-### Terms
+## Reference
 
-- [Terms](/terms.md)
+- [Terms](terms.md)
+- [Resources](Resources.md)
