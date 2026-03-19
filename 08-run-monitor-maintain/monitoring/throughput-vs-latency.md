@@ -13,18 +13,23 @@
 
 # The Fundamental Tradeoff
 
-```
-                Latency                         Throughput
-                   ▲                               ▲
-                   │      /                        │           ────────
-                   │     /                         │      ────/
-                   │    /                          │   ──/
-                   │   /                           │  /
-                   │  /                            │ /
-                   │ /                             │/
-                   └──────────► Batch Size         └──────────► Batch Size
+As batch size increases, latency increases (BAD) but throughput increases (GOOD). This creates the fundamental tradeoff in system optimization.
 
-As batch size ↑, latency ↑ (BAD)         As batch size ↑, throughput ↑ (GOOD)
+```mermaid
+graph LR
+    subgraph LatencyGraph["Latency vs Batch Size"]
+        LX["Batch Size →"]
+        LY["Latency ↑"]
+        LX --> LY
+    end
+
+    subgraph ThroughputGraph["Throughput vs Batch Size"]
+        TX["Batch Size →"]
+        TY["Throughput ↑"]
+        TX --> TY
+    end
+
+    Note["As batch size increases:<br/>Latency increases BAD<br/>Throughput increases GOOD"]
 ```
 
 ---
@@ -57,40 +62,32 @@ dynamic_batching {
 
 # How Queue Delay Affects Latency
 
-```
-max_queue_delay: 500ms (HIGH)
-──────────────────────────────────────────────────
-Request arrives
-    │
-    ▼
-┌─────────────────────────────┐
-│  Wait in queue: ~400ms      │ ← Waiting for batch to fill!
-└─────────────────────────────┘
-    │
-    ▼
-┌─────────────────────────────┐
-│  GPU inference: ~700ms      │
-└─────────────────────────────┘
-    │
-    ▼
-Total latency: 400 + 700 = 1100ms 😢
+## High Queue Delay (500ms)
 
-max_queue_delay: 50ms (LOW)
-──────────────────────────────────────────────────
-Request arrives
-    │
-    ▼
-┌─────────────────────────────┐
-│  Wait in queue: ~30ms       │ ← Quick!
-└─────────────────────────────┘
-    │
-    ▼
-┌─────────────────────────────┐
-│  GPU inference: ~700ms      │
-└─────────────────────────────┘
-    │
-    ▼
-Total latency: 30 + 700 = 730ms ✓
+```mermaid
+graph TD
+    R["Request arrives"]
+    Q["Wait in queue ~400ms<br/>Waiting for batch to fill"]
+    I["GPU inference ~700ms"]
+    T["Total latency: 1100ms"]
+
+    R --> Q
+    Q --> I
+    I --> T
+```
+
+## Low Queue Delay (50ms)
+
+```mermaid
+graph TD
+    R["Request arrives"]
+    Q["Wait in queue ~30ms<br/>Quick!"]
+    I["GPU inference ~700ms"]
+    T["Total latency: 730ms"]
+
+    R --> Q
+    Q --> I
+    I --> T
 ```
 
 ---

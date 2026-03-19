@@ -37,32 +37,22 @@ graph LR
 
 ### Architecture Diagram
 
-```
-Environment
-    ↓
-┌───────────┐
-│  SENSORS  │  (Perceive the world)
-└─────┬─────┘
-      │
-      │ Current State
-      ↓
-┌───────────────────────────┐
-│   CONDITION-ACTION RULES   │
-│                           │
-│  IF (condition1) → action1 │
-│  IF (condition2) → action2 │
-│  IF (condition3) → action3 │
-│  ...                      │
-└─────┬─────────────────────┘
-      │
-      │ Selected Action
-      ↓
-┌───────────┐
-│ ACTUATORS │  (Act on the world)
-└─────┬─────┘
-      │
-      ↓
-Environment (changed)
+```mermaid
+graph TD
+    ENV1["Environment"]
+    SENS["SENSORS<br/>Perceive the world"]
+    STATE["Current State"]
+    RULES["CONDITION-ACTION RULES<br/>IF condition1 → action1<br/>IF condition2 → action2<br/>IF condition3 → action3"]
+    ACTION["Selected Action"]
+    ACT["ACTUATORS<br/>Act on the world"]
+    ENV2["Environment Changed"]
+
+    ENV1 --> SENS
+    SENS --> STATE
+    STATE --> RULES
+    RULES --> ACTION
+    ACTION --> ACT
+    ACT --> ENV2
 ```
 
 ### Core Components

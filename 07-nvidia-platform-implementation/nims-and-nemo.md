@@ -134,25 +134,16 @@ curl http://localhost:8000/v1/chat/completions \
 
 # How They Work Together
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        NVIDIA AI Workflow                                │
-│                                                                          │
-│   ┌──────────────┐      ┌──────────────┐      ┌──────────────┐          │
-│   │   NeMo       │      │   Export     │      │    NIM       │          │
-│   │  Framework   │ ───► │   Model      │ ───► │  Container   │          │
-│   │              │      │              │      │              │          │
-│   │ • Train      │      │ • .nemo file │      │ • Optimize   │          │
-│   │ • Fine-tune  │      │ • ONNX       │      │ • Serve      │          │
-│   │ • Customize  │      │ • TensorRT   │      │ • Scale      │          │
-│   └──────────────┘      └──────────────┘      └──────────────┘          │
-│                                                       │                  │
-│                                                       ▼                  │
-│                                               ┌──────────────┐          │
-│                                               │  Production  │          │
-│                                               │    Users     │          │
-│                                               └──────────────┘          │
-└─────────────────────────────────────────────────────────────────────────┘
+```mermaid
+graph LR
+    NeMo["NeMo Framework<br/>• Train<br/>• Fine-tune<br/>• Customize"]
+    Export["Export Model<br/>• .nemo file<br/>• ONNX<br/>• TensorRT"]
+    NIM["NIM Container<br/>• Optimize<br/>• Serve<br/>• Scale"]
+    Prod["Production<br/>Users"]
+
+    NeMo --> Export
+    Export --> NIM
+    NIM --> Prod
 ```
 
 ---
@@ -161,28 +152,16 @@ curl http://localhost:8000/v1/chat/completions \
 
 NIM bundles several NVIDIA technologies:
 
-```
-┌─────────────────────────────────────────────┐
-│                NIM Container                 │
-│  ┌─────────────────────────────────────┐    │
-│  │         OpenAI-Compatible API        │    │
-│  └─────────────────┬───────────────────┘    │
-│                    │                         │
-│  ┌─────────────────▼───────────────────┐    │
-│  │       Triton Inference Server        │    │
-│  │    (request handling, batching)      │    │
-│  └─────────────────┬───────────────────┘    │
-│                    │                         │
-│  ┌─────────────────▼───────────────────┐    │
-│  │          TensorRT-LLM                │    │
-│  │    (optimized model execution)       │    │
-│  └─────────────────────────────────────┘    │
-│                                              │
-│  ┌─────────────────────────────────────┐    │
-│  │         Optimized Model              │    │
-│  │    (quantized, compiled)             │    │
-│  └─────────────────────────────────────┘    │
-└─────────────────────────────────────────────┘
+```mermaid
+graph TD
+    API["OpenAI-Compatible API"]
+    Triton["Triton Inference Server<br/>request handling, batching"]
+    TensorRT["TensorRT-LLM<br/>optimized model execution"]
+    Model["Optimized Model<br/>quantized, compiled"]
+
+    API --> Triton
+    Triton --> TensorRT
+    TensorRT --> Model
 ```
 
 ---

@@ -7,8 +7,18 @@ Reasoning patterns define **how an agent thinks, plans, and decides** before or 
 
 CoT is a prompting technique where the LLM **explains its reasoning step-by-step** before giving a final answer. All reasoning happens **inside the model's text output** - no tools, no external data.
 
-```
-Input → Think step 1 → Think step 2 → Think step 3 → Answer
+```mermaid
+graph LR
+    I["Input"]
+    S1["Think Step 1"]
+    S2["Think Step 2"]
+    S3["Think Step 3"]
+    A["Answer"]
+
+    I --> S1
+    S1 --> S2
+    S2 --> S3
+    S3 --> A
 ```
 
 - The model breaks a complex problem into smaller logical steps
@@ -38,8 +48,22 @@ Answer: 19 books remain.
 
 ReAct **interleaves reasoning with actions**. The agent thinks, then acts (calls tools/APIs), observes results, then thinks again. This is the dominant pattern for agentic AI systems.
 
-```
-Thought → Action → Observation → Thought → Action → Observation → ... → Answer
+```mermaid
+graph LR
+    T1["Thought 1"]
+    A1["Action 1"]
+    O1["Observation 1"]
+    T2["Thought 2"]
+    A2["Action 2"]
+    O2["Observation 2"]
+    ANS["Answer"]
+
+    T1 --> A1
+    A1 --> O1
+    O1 --> T2
+    T2 --> A2
+    A2 --> O2
+    O2 --> ANS
 ```
 
 - Combines internal reasoning with external tool use
@@ -70,10 +94,28 @@ Answer: It's 18C and cloudy with 75% chance of rain. Bring an umbrella.
 
 ToT explores **multiple reasoning paths simultaneously**, like a decision tree. Instead of following one chain, it branches out, evaluates each path, and selects the best one. Think of it as CoT but exploring several options in parallel.
 
-```
-         ┌─ Path A → evaluate → score
-Input ───┼─ Path B → evaluate → score  → pick best → Answer
-         └─ Path C → evaluate → score
+```mermaid
+graph TD
+    I["Input"]
+    PA["Path A"]
+    PB["Path B"]
+    PC["Path C"]
+    EA["Evaluate A<br/>Score"]
+    EB["Evaluate B<br/>Score"]
+    EC["Evaluate C<br/>Score"]
+    B["Pick Best"]
+    O["Answer"]
+
+    I --> PA
+    I --> PB
+    I --> PC
+    PA --> EA
+    PB --> EB
+    PC --> EC
+    EA --> B
+    EB --> B
+    EC --> B
+    B --> O
 ```
 
 - Generates multiple candidate reasoning chains
@@ -102,8 +144,19 @@ Best path: B (sort by color first)
 
 Self-Reflection adds a **critique-and-revise loop** where the agent evaluates its own output, identifies errors or weaknesses, and iterates to improve. The agent acts as both generator and reviewer.
 
-```
-Generate answer → Critique own answer → Revise → Critique again → ... → Final answer
+```mermaid
+graph TD
+    G["Generate answer"]
+    C["Critique own answer"]
+    D{Issues found?}
+    R["Revise"]
+    F["Final answer"]
+
+    G --> C
+    C --> D
+    D -->|Yes| R
+    R --> C
+    D -->|No| F
 ```
 
 - Agent reviews its own reasoning and output for correctness

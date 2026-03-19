@@ -26,23 +26,14 @@
 
 > **Key point:** ***TensorRT-LLM optimizes the MODEL***. Triton SERVES the optimized model. They work together.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      Your LLM                                │
-│              (Llama, GPT, Mistral, etc.)                    │
-└─────────────────────────┬───────────────────────────────────┘
-                          │ Optimize with
-                          ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    TensorRT-LLM                              │
-│         (Compiles model with LLM-specific optimizations)    │
-└─────────────────────────┬───────────────────────────────────┘
-                          │ Deploy to
-                          ▼
-┌─────────────────────────────────────────────────────────────┐
-│                Triton Inference Server                       │
-│            (Serves optimized model at scale)                │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A["Your LLM<br/>Llama, GPT, Mistral, etc."]
+    B["TensorRT-LLM<br/>Compiles model with<br/>LLM-specific optimizations"]
+    C["Triton Inference Server<br/>Serves optimized model at scale"]
+
+    A -->|Optimize with| B
+    B -->|Deploy to| C
 ```
 
 ### TensorRT-LLM Optimizations
@@ -82,23 +73,43 @@ In sequence-level batching, you group multiple **complete requests** and process
 
 Traditional batching waits for ALL sequences in a batch to complete. In-flight batching is smarter:
 
-```
-Request A (10 tokens)  ████████████████████
-Request B (50 tokens)  ████████████████████████████████████████████████████████████████
-Request C (5 tokens)   ████████████████████
-                       ↑ All must wait for longest (B) to finish
+```mermaid
+graph LR
+    subgraph Traditional["Traditional Batching"]
+        A1["Request A 10 tokens"]
+        B1["Request B 50 tokens"]
+        C1["Request C 5 tokens"]
+        W1["Wait for longest to finish"]
+        A1 --> W1
+        B1 --> W1
+        C1 --> W1
+    end
 ```
 
 #### In-Flight Batching (Token-Level Batching)
 
 In token-level batching, the batch is managed **at each token generation step**. Sequences can **join and leave dynamically**.
 
-```
-Request A (10 tokens)  ██████████ → Done! Slot freed
-Request D joins →                 ████████████████ → Done!
-Request B (50 tokens)  ████████████████████████████████████████████████████████████████
-Request C (5 tokens)   █████ → Done! Slot freed
-Request E joins →            ████████████████████████
+```mermaid
+graph TD
+    T1["Token Step 1"]
+    T2["Token Step 2"]
+    T3["Token Step 3"]
+
+    A["Request A<br/>10 tokens"]
+    B["Request B<br/>50 tokens"]
+    C["Request C<br/>5 tokens"]
+    D["Request D<br/>16 tokens"]
+    E["Request E<br/>20 tokens"]
+
+    T1 --> A
+    T1 --> B
+    T1 --> C
+    T2 --> B
+    T2 --> D
+    T2 --> E
+    T3 --> B
+    T3 --> D
 ```
 
 > **Result:** Shorter requests complete faster, new requests can join mid-batch.
@@ -412,34 +423,18 @@ In agentic AI systems, you often need to orchestrate multiple model calls with l
 
 ## High Level Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Client Applications                       │
-│              (HTTP/REST, gRPC, C API)                        │
-└─────────────────────────┬───────────────────────────────────┘
-                          │
-┌─────────────────────────▼───────────────────────────────────┐
-│                  TRITON INFERENCE SERVER                     │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │              Request Handler                         │    │
-│  │         (HTTP, gRPC, C API endpoints)               │    │
-│  └─────────────────────────┬───────────────────────────┘    │
-│                            │                                 │
-│  ┌─────────────────────────▼───────────────────────────┐    │
-│  │              Per-Model Scheduler                     │    │
-│  │    (Default, Dynamic Batcher, Sequence Batcher)     │    │
-│  └─────────────────────────┬───────────────────────────┘    │
-│                            │                                 │
-│  ┌─────────────────────────▼───────────────────────────┐    │
-│  │                   Backends                           │    │
-│  │  (TensorRT, PyTorch, ONNX, Python, TensorFlow...)   │    │
-│  └─────────────────────────────────────────────────────┘    │
-│                                                              │
-│  ┌─────────────────────────────────────────────────────┐    │
-│  │              Model Repository                        │    │
-│  │         (Local filesystem, S3, GCS, Azure)          │    │
-│  └─────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A["Client Applications<br/>HTTP/REST, gRPC, C API"]
+    B["Request Handler<br/>HTTP, gRPC, C API endpoints"]
+    C["Per-Model Scheduler<br/>Default, Dynamic Batcher, Sequence Batcher"]
+    D["Backends<br/>TensorRT, PyTorch, ONNX, Python, TensorFlow"]
+    E["Model Repository<br/>Local filesystem, S3, GCS, Azure"]
+
+    A --> B
+    B --> C
+    C --> D
+    C --> E
 ```
 
 | Component | Description |
