@@ -1,0 +1,66 @@
+📚 NVIDIA Agentic AI (NCP-AAI) Certification Study Repository
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📁 01-agent-architecture-and-design (15%)
+   ├─ agent-architecture-overview.md
+   ├─ 4-layer-agent-architecture.md
+   ├─ reasoning-patterns.md
+   └─ error-handling.md
+
+📁 02-agent-development (15%)
+   ├─ agent-orchiestration-frameworks.md (comparison)
+   ├─ langchain.md (LangGraph, memory, checkpoints)
+   ├─ autogen.md (multi-agent conversations)
+   └─ crewai.md (role-based teams)
+
+📁 03-evaluation-and-tuning (13%)
+   └─ evaluation-and-tuning-techniques.md
+
+📁 04-deployment-and-scaling (13%)
+   ├─ inference/
+   │  ├─ triton-inference-server.md
+   │  └─ triton-performance-analyzer.md
+   └─ deployment/
+      └─ enterprise-deployment-pattern.md
+
+📁 05-cognition-planning-memory (10%)
+   └─ README.md (guide for memory architectures & planning)
+
+📁 06-knowledge-integration-data (10%)
+   └─ rag-and-tools.md (embeddings, retrieval, vector DBs)
+
+📁 07-nvidia-platform-implementation (7%)
+   ├─ nims.md (NVIDIA Inference Microservices)
+   ├─ nemo.md (language models)
+   ├─ nemo-agent-toolkit.md
+   ├─ aiq-toolkit.md
+   ├─ platform-components.md
+   ├─ architecture-patterns.md
+   └─ nvidia-role-in-ecosystem.md
+
+📁 08-run-monitor-maintain (5%)
+   └─ monitoring/
+      ├─ throughput-vs-latency.md
+      └─ nim-vs-nemo.md
+
+📁 09-safety-ethics-compliance (5%)
+   └─ enterprise-ai-factory.md
+
+📁 10-human-ai-interaction (5%)
+   └─ README.md (guide for oversight & human-in-the-loop)
+
+📄 Reference Files
+   ├─ README.md (main entry point)
+   ├─ terms.md (glossary)
+   └─ Resources.md (external links)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ Study Progression:
+   1. Master Domain 1 (15%) — Foundation
+   2. Study Domain 2 (15%) — Implementation
+   3. Deep-dive Domains 5 & 6 (10% + 10%) — Cognition & Knowledge
+   4. Review Domain 4 & 3 (13% + 13%) — Deployment & Evaluation
+   5. Cover Domains 7, 8, 9, 10 (7% + 5% + 5% + 5%) — NVIDIA & Operations
+
+Total: 60-70 questions, 120 minutes
