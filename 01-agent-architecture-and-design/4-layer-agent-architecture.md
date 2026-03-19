@@ -173,3 +173,10 @@ Answer: Layer 2 (Cognition Layer - Memory component)
 | 4. Execution  | Does the work        | "Did it work?"          | Actions, results, feedback |
 
 
+References:
+- [The Raise of Agentic Ai](https://snyk.io/articles/the-rise-of-agentic-ai-and-what-it-means-for-us/)
+- [Multi Agent AI development](https://www.sitepoint.com/multi-agent-ai-development-architecture/)
+- [Percieve Reason Act](https://docs.aws.amazon.com/prescriptive-guidance/latest/agentic-ai-foundations/perceive-reason-act.html)
+- [Agentic Artificial Intelligence (AI): Architectures, Taxonomies, and Evaluation of Large Language Model Agents](https://arxiv.org/html/2601.12560v1)
+- [Cognitive Architecture](https://sema4.ai/learning-center/cognitive-architecture-ai/)
+- [Designing Cognitive Architectures: Agentic Workflow Patterns from Scratch](https://medium.com/google-cloud/designing-cognitive-architectures-agentic-workflow-patterns-from-scratch-63baa74c54bc)
