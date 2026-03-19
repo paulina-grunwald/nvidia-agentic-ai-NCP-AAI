@@ -3,7 +3,7 @@
 ## General
 
 - Triton is NVIDIA's **open-source inference serving software** that standardizes AI model deployment and execution. It's part of the NVIDIA AI platform and enables running inference on trained models from virtually any framework on GPUs, CPUs, or other processors.
-- NVIDIA's **production inference serving platform** for deploying AI models at scale. Think of it as the ***"traffic controller"*** between your application and your models.
+- NVIDIA's **production inference serving platform** for deploying AI models at scale. Think of it as the "traffic controller" between your application and your models.
 - What Triton Does:
   - Serves trained ML/DL models for inference at scale
   - Supports multiple frameworks simultaneously
@@ -16,15 +16,15 @@
   - OpenVINO
   - Python
   - RAPIDS FIL (for XGBoost, LightGBM, Scikit-Learn)
-- **LLM Support** - Triton provides low-latency, high-throughput inference for large language models through **TensorRT-LLM** integration—this is especially relevant for agentic AI workloads.
+- **LLM Support** - Triton provides low-latency, high-throughput inference for large language models through **TensorRT-LLM** integration-this is especially relevant for agentic AI workloads.
 
 ---
 
 ## TensorRT-LLM Integration
 
-**TensorRT-LLM** is NVIDIA's library specifically designed to **optimize and accelerate Large Language Model inference** on NVIDIA GPUs. It's not a general inference optimizer — it's purpose-built for transformer-based LLMs.
+**TensorRT-LLM** is NVIDIA's library specifically designed to **optimize and accelerate Large Language Model inference** on NVIDIA GPUs. It's not a general inference optimizer - it's purpose-built for transformer-based LLMs.
 
-> **Key point:** ***TensorRT-LLM optimizes the MODEL***. Triton SERVES the optimized model. They work together.
+> **Key point:** TensorRT-LLM optimizes the MODEL. Triton SERVES the optimized model. They work together.
 
 ```mermaid
 graph TD
@@ -49,7 +49,7 @@ graph TD
 
 ### In-Flight Batching
 
-> LLMs are **autoregressive** — they generate **one token at a time**:
+> LLMs are **autoregressive** - they generate **one token at a time**:
 >
 > ```
 > Prompt: "What is AI?"
@@ -128,7 +128,7 @@ The batching decision happens **at every token generation step**:
 
 ### Paged Attention
 
-Inspired by OS virtual memory — KV cache is stored in non-contiguous "pages" instead of one big block.
+Inspired by OS virtual memory - KV cache is stored in non-contiguous "pages" instead of one big block.
 
 **Benefits:**
 - No memory fragmentation
@@ -153,7 +153,7 @@ For each new token, the model needs to:
 2. Compare new token's Q against ALL previous tokens' K
 3. Use attention weights to combine ALL previous tokens' V
 
-Without KV Cache, generating each token recomputes K and V for ALL previous tokens ⇒ This is **O(n²)** complexity — gets very slow for long sequences.
+Without KV Cache, generating each token recomputes K and V for ALL previous tokens ⇒ This is **O(n²)** complexity - gets very slow for long sequences.
 
 #### Exam Question Patterns
 
@@ -161,7 +161,7 @@ Without KV Cache, generating each token recomputes K and V for ALL previous toke
   A: To avoid recomputing Key and Value tensors for all previous tokens at each generation step. Reduces complexity from O(n²) to O(n).
 
 - **Q: What's the main challenge with KV cache?**
-  A: Memory consumption — KV cache can be larger than model weights for long sequences and large batches.
+  A: Memory consumption - KV cache can be larger than model weights for long sequences and large batches.
 
 - **Q: How does Grouped-Query Attention help?**
   A: Multiple query heads share the same K,V pairs, reducing KV cache size while maintaining most of the quality.
@@ -187,7 +187,7 @@ GPU kernel: "All cores: multiply your assigned number by 2"
 #### Exam Points on Custom CUDA Kernels
 
 - **Q: Why does TensorRT-LLM outperform standard PyTorch inference?**
-  A: Custom CUDA kernels optimized for LLM operations — kernel fusion, Flash Attention, optimized memory access.
+  A: Custom CUDA kernels optimized for LLM operations - kernel fusion, Flash Attention, optimized memory access.
 
 - **Q: What is kernel fusion?**
   A: Combining multiple operations into a single GPU kernel to reduce memory transfers.
@@ -326,10 +326,10 @@ Agentic AI systems make **many LLM calls** with varying lengths:
 A: Use TensorRT-LLM to compile the model with optimizations (quantization, KV cache), then deploy on Triton for serving at scale.
 
 **Q: What enables efficient batching for requests with different sequence lengths?**
-A: In-flight batching (also called continuous batching) — allows new requests to join and completed requests to leave mid-batch.
+A: In-flight batching (also called continuous batching) - allows new requests to join and completed requests to leave mid-batch.
 
 **Q: How does TensorRT-LLM handle memory for long sequences?**
-A: Paged attention — manages KV cache in pages like virtual memory, preventing fragmentation.
+A: Paged attention - manages KV cache in pages like virtual memory, preventing fragmentation.
 
 **Q: What's the relationship between TensorRT-LLM and Triton?**
 A: TensorRT-LLM optimizes the LLM model. Triton serves the optimized model with features like dynamic batching, scaling, and API endpoints.
@@ -350,7 +350,7 @@ A: TensorRT-LLM with in-flight batching, deployed on Triton with appropriate ins
 
 ## Model Ensembling
 
-**Ensembling** means chaining multiple models together into a **pipeline** where the output of one model flows into the input of the next — all handled server-side in a single request.
+**Ensembling** means chaining multiple models together into a **pipeline** where the output of one model flows into the input of the next - all handled server-side in a single request.
 
 Allows executing AI workloads with multiple models, pipelines, and pre/post-processing steps. Different parts of an ensemble can run on CPU or GPU.
 
@@ -480,7 +480,7 @@ graph TD
 
 ## Batching & Scheduling
 
-> Batching is **critical for GPU throughput optimization**—a key exam topic.
+> Batching is **critical for GPU throughput optimization**-a key exam topic.
 
 > **Exam Tip:** Increasing instance count allows more parallel inference but uses more GPU memory.
 
@@ -673,7 +673,7 @@ dynamic_batching {
 
 ## Instance Groups (Exam Favorite)
 
-Instance groups control parallelism — how many copies of the model run simultaneously.
+Instance groups control parallelism - how many copies of the model run simultaneously.
 
 | Setting | Description |
 |---------|-------------|
@@ -814,7 +814,7 @@ model_warmup [
 
 ## Response Cache
 
-Cache responses to identical requests — useful for repeated queries.
+Cache responses to identical requests - useful for repeated queries.
 
 ```protobuf
 response_cache {

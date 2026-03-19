@@ -12,7 +12,7 @@
 
 ## What Makes AutoGen Different
 
-AutoGen's key innovation is **multi-agent conversation** — instead of one LLM doing everything, you create specialized agents that talk to each other.
+AutoGen's key innovation is **multi-agent conversation** - instead of one LLM doing everything, you create specialized agents that talk to each other.
 
 Think of it like a team meeting: you have a coder, a reviewer, a planner, and they collaborate through conversation to complete tasks.
 
@@ -78,7 +78,7 @@ The `human_input_mode` parameter controls when human intervention is requested:
 | `TERMINATE` | Ask human only when termination condition is met |
 | `NEVER` | Fully autonomous, no human input requested |
 
-**Exam tip:** Know when to use each mode — `NEVER` for automation, `ALWAYS` for supervised tasks, `TERMINATE` for review before completion.
+**Exam tip:** Know when to use each mode - `NEVER` for automation, `ALWAYS` for supervised tasks, `TERMINATE` for review before completion.
 
 
 # Tool/Function Calling

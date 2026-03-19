@@ -220,4 +220,4 @@ NIM  → Ship it
 | "Use NeMo for production deployment" | NeMo is for training; use NIM for deployment |
 | "Use NIM to fine-tune models" | NIM is for serving; use NeMo for fine-tuning |
 | "NIM replaces Triton" | NIM includes Triton inside it |
-| "NeMo and NIM are competitors" | They're complementary — different lifecycle stages |
+| "NeMo and NIM are competitors" | They're complementary - different lifecycle stages |

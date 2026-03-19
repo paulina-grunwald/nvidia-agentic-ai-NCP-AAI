@@ -32,8 +32,8 @@ This domain covers mechanisms for human oversight, control, and meaningful inter
 
 ## Related Materials
 
-- [Error Handling](../01-agent-architecture-and-design/error-handling.md) — failure modes and recovery
-- [Enterprise AI Factory](../09-safety-ethics-compliance/enterprise-ai-factory.md) — governance patterns
+- [Error Handling](../01-agent-architecture-and-design/error-handling.md) - failure modes and recovery
+- [Enterprise AI Factory](../09-safety-ethics-compliance/enterprise-ai-factory.md) - governance patterns
 - Framework documentation on agent control and human feedback
 
 ## Study Plan

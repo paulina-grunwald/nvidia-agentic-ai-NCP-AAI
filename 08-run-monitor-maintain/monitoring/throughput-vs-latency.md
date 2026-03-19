@@ -7,7 +7,7 @@
 | **Latency** | Time for ONE request to complete (start to finish) | Milliseconds (ms) |
 | **Throughput** | Number of requests processed per unit time | Requests/second |
 
-**Key insight:** These are often **inversely related** — optimizing for one can hurt the other.
+**Key insight:** These are often **inversely related** - optimizing for one can hurt the other.
 
 ---
 
@@ -171,7 +171,7 @@ model_repository/
 | --- | --- | --- |
 | High GPU util + High latency | Over-batching (queue delay too high) | Reduce queue delay |
 | Low GPU util + High latency | Bottleneck elsewhere (CPU, memory, network) | Profile to find bottleneck |
-| High GPU util + Low latency | ✅ Perfect configuration! | — |
+| High GPU util + Low latency | ✅ Perfect configuration! | - |
 | Low GPU util + Low latency | Under-utilizing GPU | Can increase batch size |
 
 ---
@@ -217,4 +217,4 @@ model_repository/
 | "Increase batch for latency" | Batch size helps throughput, HURTS latency |
 | "CPU for predictable latency" | CPU is 60-120x SLOWER than GPU for LLMs |
 | "High throughput = low latency" | They're often inversely related |
-| "Add GPUs to fix latency" | Check batching config first — often the real issue |
+| "Add GPUs to fix latency" | Check batching config first - often the real issue |

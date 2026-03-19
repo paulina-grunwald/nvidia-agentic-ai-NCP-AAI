@@ -31,9 +31,9 @@ This domain covers the core cognitive processes that enable agents to reason, pl
 
 ## Related Materials
 
-- [Reasoning Patterns](../01-agent-architecture-and-design/reasoning-patterns.md) — ReAct, Chain-of-Thought, Tree of Thoughts
-- [LangGraph Memory & State Management](../02-agent-development/langchain.md#memory--state-management) — checkpoints, state persistence
-- [4-Layer Agent Architecture](../01-agent-architecture-and-design/4-layer-agent-architecture.md) — planning layer
+- [Reasoning Patterns](../01-agent-architecture-and-design/reasoning-patterns.md) - ReAct, Chain-of-Thought, Tree of Thoughts
+- [LangGraph Memory & State Management](../02-agent-development/langchain.md#memory--state-management) - checkpoints, state persistence
+- [4-Layer Agent Architecture](../01-agent-architecture-and-design/4-layer-agent-architecture.md) - planning layer
 
 ## Study Plan
 
