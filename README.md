@@ -65,6 +65,7 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 - [LangChain/LangGraph](02-agent-development/langchain.md) - stateful graphs, memory, checkpoints, NVIDIA integration
 - [CrewAI](02-agent-development/crewai.md) - role-based agent teams
 - [AutoGen](02-agent-development/autogen.md) - multi-agent conversations
+- [Prompt Engineering](02-agent-development/prompt-engineering.md) - zero-shot, few-shot, CoT, ReAct, tool use, prompt tuning, NIM templates
 
 ### 3. Evaluation and Tuning (13%)
 
@@ -78,6 +79,7 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 
 **Enterprise Deployment:**
 - [Enterprise Deployment Pattern](04-deployment-and-scaling/deployment/enterprise-deployment-pattern.md)
+- [Deployment Orchestration](04-deployment-and-scaling/deployment/deployment-orchestration.md) - Kubernetes vs Slurm, NVIDIA context
 
 ### 5. Cognition, Planning, and Memory (10%)
 
