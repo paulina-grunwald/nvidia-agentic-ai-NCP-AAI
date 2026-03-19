@@ -110,7 +110,8 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 
 ### 10. Human-AI Interaction and Oversight (5%)
 
-*Study materials coming soon* - See error handling and multi-agent patterns
+- [Human-AI Interaction Overview](10-human-ai-interaction/README.md) - human-in-the-loop patterns, oversight, safety guardrails, UX
+- See [Error Handling](01-agent-architecture-and-design/error-handling.md) for failure modes and recovery patterns
 
 ## Reference
 
