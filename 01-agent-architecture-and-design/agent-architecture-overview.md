@@ -13,6 +13,64 @@ graph LR
     A --> E[Environment]
     E -->|feedback| S
 ```
+
+### The Sense → Act Pattern
+
+**How It Works:**
+
+```
+1. SENSE: Perceive current environment state
+   ↓
+2. MATCH: Find matching condition-action rule (there is no explicit reasoning, planning
+   or multi-step thinking involved!)
+   ↓
+3. ACT: Execute the action immediately
+   ↓
+4. REPEAT: Go back to SENSE
+```
+
+- **No thinking in between!** Just: "If this, then that."
+- Ideal for scenarios requiring rapid, deterministic reactions. Everything is derived by immediate trigger.
+- Behaviour is governed by rules, triggers, or simple condition-action pairs.
+- Fast execution and low latency due to minimal processing overhead
+- Highly predictive, consistent behaviour within known environment.
+
+### Architecture Diagram
+
+```
+Environment
+    ↓
+┌───────────┐
+│  SENSORS  │  (Perceive the world)
+└─────┬─────┘
+      │
+      │ Current State
+      ↓
+┌───────────────────────────┐
+│   CONDITION-ACTION RULES   │
+│                           │
+│  IF (condition1) → action1 │
+│  IF (condition2) → action2 │
+│  IF (condition3) → action3 │
+│  ...                      │
+└─────┬─────────────────────┘
+      │
+      │ Selected Action
+      ↓
+┌───────────┐
+│ ACTUATORS │  (Act on the world)
+└─────┬─────┘
+      │
+      ↓
+Environment (changed)
+```
+
+### Core Components
+
+1. **Sensors (Perception)** - Gather raw environmental data (temperature, proximity, user input, time, battery level)
+2. **Condition-Action Rules** - Direct mapping from conditions to actions. Rules have a condition, an action, and optionally a priority. The system finds the first or highest-priority matching rule.
+3. **Actuators** - Execute actions on the environment (turn on/off devices, move, send notifications)
+
 Key Characteristics:
 
 - ❌ No internal state
@@ -91,8 +149,11 @@ Q1: What's the main difference between reactive and deliberative architectures?
 - Reactive: Immediate Sense→Act with no reasoning or memory.
 - Deliberative: Perceive→Reason→Act→Learn with planning and memory.
 
-Q2:When would you choose a reactive architecture over a deliberative one?
+Q2: When would you choose a reactive architecture over a deliberative one?
 When you need: (1) Fast response times, (2) Simple predictable environment, (3) Low computational resources, (4) High reliability/safety, (5) Real-time constraints
+
+Q3: What is subsumption architecture?
+A layered reactive architecture where lower-priority behaviors can be suppressed by higher-priority ones. Example: obstacle avoidance (high priority) suppresses exploration (low priority).
 
 ## 2. Deliberative Architectures (Goal-Based Reasoning)
 
@@ -127,6 +188,8 @@ This means the user should definitely bring an umbrella. I now have enough infor
 to provide a complete answer.
 
 Action 2: final_answer()
+
+Observation 2: Task complete
 
 Answer: The weather in San Francisco is currently 18C and cloudy. There's a 75%
 chance of precipitation with rain expected in 2 hours, so yes, you should definitely
