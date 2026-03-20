@@ -2,6 +2,12 @@
 
 **AutoGen** is Microsoft's open-source framework for building **multi-agent conversational AI systems**. It enables multiple AI agents to collaborate, converse with each other, and work together to solve complex tasks.
 
+Central abstraction - conversation as orchestration: Unlike LangGraph (graph-based state machines) or CrewAI (role-based crews), AutoGen uses multi-agent conversation as the core abstraction, which aligns with how LLMs naturally operate via dialogue. Tribe Agents negotiate and collaborate through structured turn-taking rather than explicit workflow graphs.
+
+AutoGen supports several conversation patterns: Two-Agent Chat (simplest, peer-to-peer), Sequential Chat (chain of conversations where summaries carry over), Nested Chat (encapsulates complex workflows within a single agent for reuse in larger workflows), and Group Chat (centralized architecture with more than two agents).
+
+AutoGen is described as being designed to support dynamic learning and adaptation, making it suitable for implementing architectures with robust memory and planning capabilities and continuous learning mechanisms. Flashgenius So when a question asks about an agent that needs to adapt its behavior through dialogue or iterative refinement - that's the AutoGen answer.
+
 **Official Documentation:** https://microsoft.github.io/autogen/
 
 **GitHub:** https://github.com/microsoft/autogen
