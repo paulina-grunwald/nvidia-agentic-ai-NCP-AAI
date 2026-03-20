@@ -27,6 +27,12 @@ A neural network technique that weights the importance of relationships between 
 ### Transformer Architecture
 Neural network architecture based on multi-head attention mechanisms. Replaced sequential processing with parallel attention, allowing simultaneous processing of entire sequences. Foundation of modern LLMs (GPT, Claude, LLaMA).
 
+### LSTM (Long Short-Term Memory)
+A type of recurrent neural network (RNN) architecture designed to learn long-range dependencies in sequential data. Uses gates (forget, input, output) to control what information to retain or discard over time steps. Predecessor to Transformers for sequence modeling. Limited by sequential processing (slower than Transformers) but foundational for understanding memory in neural networks.
+
+### MLP (Multi-Layer Perceptron)
+The simplest form of a feedforward neural network — just stacked layers of neurons (input → hidden → output) with activation functions between them. No recurrence, no attention — just dense/fully-connected layers. Used as building block in larger architectures and for simple regression/classification tasks. Limited by inability to capture sequential or contextual patterns.
+
 ---
 
 ## 2. Embeddings & Semantic Understanding
@@ -126,13 +132,17 @@ Technique that combines:
 Reduces hallucination vs. pure generation. Foundation of knowledge-aware agents.
 
 ### RAGAS Framework
-**Reference-free evaluation framework for RAG systems.** Measures four dimensions:
-- **Faithfulness**: Is generated answer grounded in retrieved context? (no hallucinations)
-- **Answer Relevance**: Does answer directly address the question?
-- **Context Recall**: Are relevant documents retrieved? (Recall of retriever)
-- **Context Precision**: Are retrieved documents focused/relevant? (Precision of retriever)
+**Reference-free evaluation framework for RAG systems.** The standard for evaluating both components of RAG pipelines across two dimensions:
 
-Advantages: No need for human ground truth labels; uses LLM-based evaluation. Separates evaluation of retriever vs. generator to identify bottlenecks. [Read more](https://docs.ragas.io/en/latest/concepts/metrics/)
+**Retrieval Metrics** (Are we getting the right documents?):
+- **Context Recall**: Percentage of relevant documents actually retrieved. Identifies under-retrieval (missing information).
+- **Context Precision**: Percentage of retrieved documents that are relevant/focused. Identifies over-retrieval (irrelevant noise).
+
+**Generation Metrics** (Given context, is the LLM generating good answers?):
+- **Faithfulness**: Is generated answer grounded in retrieved context with no hallucinations?
+- **Answer Relevance**: Does answer directly address the input question?
+
+Advantages: No need for human ground truth labels; uses LLM-based evaluation. Separates evaluation of retriever vs. generator to identify bottlenecks. Enables root cause analysis (retrieval problem vs. generation problem). [Read more](https://docs.ragas.io/en/latest/concepts/metrics/)
 
 ### Reranker
 Model that re-ranks initial retrieval results. Two-pass retrieval:
@@ -170,17 +180,23 @@ Time required to generate a response. Measured in multiple ways:
 
 Affected by model size, input length, batch size, and optimization level.
 
-### Quantization
-Technique reducing model size by converting floating-point weights to lower precision (e.g., FP32 → INT8). **INT8 quantization** reduces memory by 75%, speeds computation, with <1% accuracy loss. Two approaches: Post-Training Quantization (PTQ) or Quantization-Aware Training (QAT). [More info](https://www.ibm.com/think/topics/quantization)
+### Quantization (INT8 / FP8)
+Technique reducing model size by converting floating-point weights to lower precision (e.g., FP32 → INT8 or FP8). Two main approaches differ in precision handling:
+- **INT8 (8-bit integer)**: Uses uniform spacing across 256 values. Reduces memory by 75%, speeds computation, with <1% accuracy loss. Struggles with outlier values (extreme weights/activations) that either get clipped or force range stretching.
+- **FP8 (8-bit floating-point)**: Retains floating-point structure (sign, exponent, mantissa) with flexible range via exponent. Handles outliers better than INT8, supports wider dynamic range. Superior accuracy across workloads (92.64% coverage vs 65.87% for INT8) but uses 40-50% more silicon than INT8.
+
+Two approaches: Post-Training Quantization (PTQ) or Quantization-Aware Training (QAT). Production systems typically use mixed precision (INT8 + FP8) tuned per layer. [More info](https://developer.nvidia.com/blog/floating-point-8-an-introduction-to-efficient-lower-precision-ai-training/)
 
 ### Tensor Parallelism
-Distributing a single model across multiple GPUs by splitting layers/attention heads. Each GPU processes part of the computation. Used for very large models (70B+). Reduces latency but adds communication overhead.
+Distributing a single model across multiple GPUs by splitting individual parameter tensors (intra-layer parallelism). Each GPU holds 1/N chunks of weights and performs computation on partial tensors. Unlike pipeline parallelism which keeps weights intact but partitions layers, tensor parallelism splits individual weights across devices. Benefits: reduces model state and activation memory, avoids pipeline bubble problem (all devices work on same batch simultaneously). Drawbacks: requires high-speed interconnects (NVLink) for frequent device communication, typically restricted to within-node GPUs. Essential for massive models where a single parameter (e.g., large embedding table, softmax layer) exceeds GPU memory. [More info](https://docs.nvidia.com/nemo-framework/user-guide/latest/nemotoolkit/features/parallelisms.html)
 
 ### Pipeline Parallelism
 Splitting model layers across multiple GPUs, with different batches processing different stages simultaneously. Reduces idle time vs. tensor parallelism. Good for long models but adds complexity.
 
 ### KV Cache / Paged Attention
-Optimization for inference: pre-compute and cache Key-Value embeddings from previous tokens, avoiding recomputation. Paged attention makes KV cache more memory-efficient by storing non-contiguously. Major contributor to speed improvements (2-3x).
+**KV Cache**: Pre-computes and caches Key-Value embeddings from previous tokens during decoding, avoiding recomputation on subsequent tokens. Stored in GPU memory.
+
+**Paged Attention** (vLLM): Advanced KV cache optimization inspired by OS virtual memory/paging. Breaks memory into fixed-size blocks (~16 tokens per block) and maintains logical→physical block mappings, allowing non-contiguous block placement. Solves the KV cache fragmentation problem—existing systems waste 60-80% of KV cache memory, while Paged Attention achieves <4% waste. Enables larger batch sizes and higher throughput. Key innovation: blocks are allocated on-demand as tokens generated, making memory layout flexible. Deployed in vLLM, delivering up to 24x higher throughput vs. HuggingFace Transformers. Major contributor to speed improvements (2-3x). [More info](https://blog.vllm.ai/2023/06/20/vllm.html)
 
 ### Batch Size
 Number of requests processed simultaneously. Larger batches = better GPU utilization and throughput, but higher latency per individual request. Trade-off depends on use case.
@@ -200,6 +216,9 @@ NVIDIA's open-source library for optimizing LLM inference. Provides:
 - Paged attention
 
 Produces 2-3x speedup vs. naive inference. Requires more setup than NIMs but maximum control.
+
+### Custom CUDA Kernels
+Hand-optimized GPU compute kernels written in CUDA to accelerate specific operations beyond standard libraries (cuBLAS, cuDNN). Key optimization techniques: kernel fusion (combining multiple operations), memory coalescing (sequential memory access), shared memory usage for temporary storage, minimizing branch divergence. Enable operation-specific tuning for target hardware. Applications: fused attention computations, optimized matrix-vector operations, specialized RNN/LSTM implementations. Performance gains: specialized kernels achieve 7.3x speedup over generic implementations (e.g., PyTorch cuBLAS) through memory hierarchy exploitation. Used extensively in TensorRT-LLM and inference engines for latency-critical deployments. Trade-off: requires significant engineering effort but highest possible optimization for known workloads. [More info](https://huggingface.co/blog/kernel-builder)
 
 ### Triton Inference Server
 Multi-model serving platform. Manages multiple models on shared infrastructure, handles batching, scheduling, and load balancing. Useful when deploying LLM + embeddings + reranker.
@@ -264,6 +283,12 @@ Fine-tuning only 0.1% of parameters via low-rank adapters.
 - **Cost**: 1 GPU, 1-2 hours
 - **Quality**: 90% of full fine-tuning quality
 - **Best for**: Fast iteration, pilots, resource-constrained settings
+
+### LoRA (Low-Rank Adaptation)
+A parameter-efficient fine-tuning (PEFT) method that adapts pre-trained models by training small low-rank "adapter" matrices while keeping original weights frozen. Works by decomposing weight updates into two smaller matrices (A and B) that approximate weight changes. Injects trainable rank decomposition matrices into each Transformer layer. Reduces trainable parameters to ~0.1% of full model (e.g., GPT-3 reduced to 18M trainable parameters), lowering GPU memory requirements by ~2/3 vs. full fine-tuning. No additional inference overhead. [More info](https://sebastianraschka.com/blog/2023/llm-finetuning-lora.html)
+
+### DoRA (Weight-Decomposed Low-Rank Adaptation)
+An enhancement to LoRA that decomposes pre-trained weights into **magnitude** and **direction** components, then applies LoRA only to the directional updates. The magnitude component is separately fine-tuned while direction is updated via LoRA for efficiency. Improves upon LoRA by enhancing both learning capacity and training stability. Consistently outperforms LoRA on tasks like commonsense reasoning, visual instruction tuning, and multimodal understanding. No additional inference overhead vs. LoRA. [More info](https://sebastianraschka.com/blog/2024/lora-dora.html)
 
 ### Supervised Fine-Tuning (SFT)
 Full model fine-tuning on labeled examples (question-answer pairs, instructions, etc.).

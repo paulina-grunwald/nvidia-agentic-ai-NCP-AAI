@@ -2,17 +2,16 @@
 
 **AutoGen** is Microsoft's open-source framework for building **multi-agent conversational AI systems**. It enables multiple AI agents to collaborate, converse with each other, and work together to solve complex tasks.
 
-Central abstraction - conversation as orchestration: Unlike LangGraph (graph-based state machines) or CrewAI (role-based crews), AutoGen uses multi-agent conversation as the core abstraction, which aligns with how LLMs naturally operate via dialogue. Tribe Agents negotiate and collaborate through structured turn-taking rather than explicit workflow graphs.
+Central abstraction
+Conversation as orchestration: Unlike LangGraph (graph-based state machines) or CrewAI (role-based crews), AutoGen uses multi-agent conversation as the core abstraction, which aligns with how LLMs naturally operate via dialogue. Tribe Agents negotiate and collaborate through structured turn-taking rather than explicit workflow graphs.
 
 AutoGen supports several conversation patterns: Two-Agent Chat (simplest, peer-to-peer), Sequential Chat (chain of conversations where summaries carry over), Nested Chat (encapsulates complex workflows within a single agent for reuse in larger workflows), and Group Chat (centralized architecture with more than two agents).
 
-AutoGen is described as being designed to support dynamic learning and adaptation, making it suitable for implementing architectures with robust memory and planning capabilities and continuous learning mechanisms. Flashgenius So when a question asks about an agent that needs to adapt its behavior through dialogue or iterative refinement - that's the AutoGen answer.
+AutoGen is described as being designed to support dynamic learning and adaptation, making it suitable for implementing architectures with robust memory and planning capabilities and continuous learning mechanisms. So when a question asks about an agent that needs to adapt its behavior through dialogue or iterative refinement - that's the AutoGen answer.
 
-**Official Documentation:** https://microsoft.github.io/autogen/
+[**Official Documentation**](https://microsoft.github.io/autogen)
 
-**GitHub:** https://github.com/microsoft/autogen
-
----
+[**GitHub:**](https://github.com/microsoft/autogen)
 
 # Core Concepts
 
@@ -73,19 +72,17 @@ Orchestrates conversations between multiple agents in a group chat setting.
 
 ---
 
-
 # Human-in-the-Loop Modes
 
 The `human_input_mode` parameter controls when human intervention is requested:
 
-| Mode | Behavior |
-| --- | --- |
-| `ALWAYS` | Ask human for input after every agent response |
+| Mode        | Behavior                                         |
+| ----------- | ------------------------------------------------ |
+| `ALWAYS`    | Ask human for input after every agent response   |
 | `TERMINATE` | Ask human only when termination condition is met |
-| `NEVER` | Fully autonomous, no human input requested |
+| `NEVER`     | Fully autonomous, no human input requested       |
 
 **Exam tip:** Know when to use each mode - `NEVER` for automation, `ALWAYS` for supervised tasks, `TERMINATE` for review before completion.
-
 
 # Tool/Function Calling
 
@@ -109,29 +106,28 @@ register_function(
 
 ---
 
-
 # Key Features Summary (Exam Focus)
 
-| Feature | Description |
-| --- | --- |
-| Multi-Agent Conversations | Multiple agents collaborate through message passing |
-| Flexible Agent Roles | AssistantAgent (LLM), UserProxyAgent (execution), Custom agents |
-| Code Execution | Built-in ability to run generated code safely |
-| Human-in-the-Loop | Configurable human intervention points |
-| Tool Integration | Register custom functions as tools |
-| Group Chat | Orchestrate complex multi-agent workflows |
-| LLM Agnostic | Works with OpenAI, Azure, local models |
+| Feature                   | Description                                                     |
+| ------------------------- | --------------------------------------------------------------- |
+| Multi-Agent Conversations | Multiple agents collaborate through message passing             |
+| Flexible Agent Roles      | AssistantAgent (LLM), UserProxyAgent (execution), Custom agents |
+| Code Execution            | Built-in ability to run generated code safely                   |
+| Human-in-the-Loop         | Configurable human intervention points                          |
+| Tool Integration          | Register custom functions as tools                              |
+| Group Chat                | Orchestrate complex multi-agent workflows                       |
+| LLM Agnostic              | Works with OpenAI, Azure, local models                          |
 
 ---
 
 # AutoGen vs Other Frameworks
 
-| Framework | Primary Focus |
-| --- | --- |
-| **AutoGen** | Multi-agent conversation and collaboration |
-| **LangChain** | Chains, tools, and retrieval pipelines |
-| **LlamaIndex** | Data indexing and RAG |
-| **CrewAI** | Role-based agent teams (built on LangChain) |
+| Framework      | Primary Focus                               |
+| -------------- | ------------------------------------------- |
+| **AutoGen**    | Multi-agent conversation and collaboration  |
+| **LangChain**  | Chains, tools, and retrieval pipelines      |
+| **LlamaIndex** | Data indexing and RAG                       |
+| **CrewAI**     | Role-based agent teams (built on LangChain) |
 
 <aside>
 🔥
