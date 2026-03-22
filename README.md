@@ -28,7 +28,7 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 
 | Domain | Weight | Study Resources |
 | --- | --- | --- |
-| **Agent Architecture and Design** | 15% | Agent Architecture Overview, 4-Layer Architecture, Reasoning Patterns |
+| **Agent Architecture and Design** | 15% | Agent Architecture Overview, 4-Layer Architecture, Reasoning Patterns, Stateful Orchestration, Multi-Agent Communication, Memory Management, Knowledge Graphs, Human-Agent UI Design |
 | **Agent Development** | 15% | LangChain, CrewAI, AutoGen, Code Examples |
 | **Evaluation and Tuning** | 13% | Evaluation and Tuning Techniques, Frameworks |
 | **Deployment and Scaling** | 13% | Triton, Enterprise Deployment Pattern, Platform Components |
@@ -58,6 +58,11 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 - [4 Layer Agent Architecture](01-agent-architecture-and-design/4-layer-agent-architecture.md) - perception, cognition, planning, execution
 - [Reasoning Patterns](01-agent-architecture-and-design/reasoning-patterns.md) - ReAct, Chain-of-Thought, Tree of Thoughts, Self-Reflection
 - [Error Handling](01-agent-architecture-and-design/error-handling.md) - resilience patterns and fault tolerance
+- [Stateful Orchestration](01-agent-architecture-and-design/stateful-orchestration.md) - logic trees, prompt chains, multi-step reasoning
+- [Multi-Agent Communication](01-agent-architecture-and-design/multi-agent-communication.md) - multi-agent communication and orchestration
+- [Memory Management](01-agent-architecture-and-design/memory-management.md) - short-term and long-term memory for context retention
+- [Knowledge Graphs](01-agent-architecture-and-design/knowledge-graphs.md) - knowledge graphs for relational reasoning
+- [Human-Agent UI Design](01-agent-architecture-and-design/human-agent-ui-design.md) - UI patterns for human-agent interaction
 
 ### 2. Agent Development (15%)
 
