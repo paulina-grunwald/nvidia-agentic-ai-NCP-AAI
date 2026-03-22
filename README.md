@@ -30,14 +30,14 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 | --- | --- | --- |
 | **Agent Architecture and Design** | 15% | Agent Architecture Overview, 4-Layer Architecture, Reasoning Patterns, Stateful Orchestration, Multi-Agent Communication, Memory Management, Knowledge Graphs, Human-Agent UI Design |
 | **Agent Development** | 15% | LangChain, CrewAI, AutoGen, Prompt Engineering, Custom Tools & APIs, Multimodal Models, Streaming & Feedback, Decision-Making Evaluation |
-| **Evaluation and Tuning** | 13% | Evaluation and Tuning Techniques, Frameworks |
-| **Deployment and Scaling** | 13% | Triton, Enterprise Deployment Pattern, Platform Components |
-| **Cognition, Planning, and Memory** | 10% | Reasoning Patterns, Memory & State Management, LangGraph Checkpoints |
-| **Knowledge Integration and Data Handling** | 10% | RAG and Tools, Vector DBs, Embeddings |
-| **NVIDIA Platform Implementation** | 7% | NIMs, NeMo, Triton, AIQ Toolkit, Architecture Patterns |
-| **Run, Monitor, and Maintain** | 5% | Triton Performance Analyzer, Enterprise Deployment Pattern |
-| **Safety, Ethics, and Compliance** | 5% | Error Handling, Enterprise AI Factory |
-| **Human-AI Interaction and Oversight** | 5% | Error Handling, Multi-Agent Coordination patterns |
+| **Evaluation and Tuning** | 13% | Evaluation Techniques, Pipelines, Benchmarking, Parameter Tuning, User Feedback, Optimization |
+| **Deployment and Scaling** | 13% | Triton, Enterprise Deployment, Containerization & K8s, MLOps & CI/CD |
+| **Cognition, Planning, and Memory** | 10% | Memory & Planning, Adaptive Reasoning, Reasoning Patterns, LangGraph Checkpoints |
+| **Knowledge Integration and Data Handling** | 10% | RAG and Tools, Vector DB Optimization, ETL & Data Quality, Real-Time Knowledge Access |
+| **NVIDIA Platform Implementation** | 7% | NIMs, NeMo, NeMo Guardrails, AIQ Toolkit, Architecture Patterns |
+| **Run, Monitor, and Maintain** | 5% | Observability & Tracing, Alerting & Maintenance, Throughput vs Latency |
+| **Safety, Ethics, and Compliance** | 5% | Enterprise AI Factory, Responsible AI & Auditing, Bias Detection, Compliance |
+| **Human-AI Interaction and Oversight** | 5% | HITL Workflows, Escalation Protocols, Transparency, Human-Agent UI Design |
 
 ## Quick Start
 
@@ -78,7 +78,12 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 
 ### 3. Evaluation and Tuning (13%)
 
-- [Evaluation and Tuning Techniques](03-evaluation-and-tuning/evaluation-and-tuning-techniques.md)
+- [Evaluation and Tuning Techniques](03-evaluation-and-tuning/evaluation-and-tuning-techniques.md) - RAGAS, LLM-as-Judge, trajectory evaluation, faithfulness, relevance
+- [Evaluation Pipelines](03-evaluation-and-tuning/evaluation-pipelines.md) - pipeline anatomy, scoring methods, NVIDIA eval tools (AIQ, NeMo Evaluator, Triton perf_analyzer), CI/CD integration
+- [Benchmarking and Comparison](03-evaluation-and-tuning/benchmarking-comparison.md) - multi-dimension comparison, statistical significance, cross-task/cross-dataset testing, model routing
+- [Parameter Tuning](03-evaluation-and-tuning/parameter-tuning.md) - temperature/top-p/top-k, quantization trade-offs, RAG parameters, systematic tuning methodology
+- [User Feedback Integration](03-evaluation-and-tuning/user-feedback-integration.md) - structured feedback schemas, correction feedback, implicit signals, RLHF/DPO
+- [Evaluation-Driven Optimization](03-evaluation-and-tuning/evaluation-driven-optimization.md) - root cause analysis, 80/20 rule, impact vs effort matrix, optimization tracking
 
 ### 4. Deployment and Scaling (13%)
 
@@ -90,37 +95,52 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 - [Enterprise Deployment Pattern](04-deployment-and-scaling/deployment/enterprise-deployment-pattern.md)
 - [Deployment Orchestration](04-deployment-and-scaling/deployment/deployment-orchestration.md) - Kubernetes vs Slurm, NVIDIA context
 
+**Containerization & Scaling:**
+- [Containerization and Scaling](04-deployment-and-scaling/containerization-scaling.md) - Docker, Kubernetes patterns, HPA, load balancing, GPU scheduling, cost optimization
+- [MLOps and CI/CD](04-deployment-and-scaling/mlops-cicd.md) - CI/CD pipelines, artifact versioning, A/B and canary deployments, rollback strategies
+
 ### 5. Cognition, Planning, and Memory (10%)
 
-*Study materials coming soon* - See reasoning patterns and memory sections in Agent Architecture and LangGraph documents
+- [Memory and Planning](05-cognition-planning-memory/memory-and-planning.md) - working memory, episodic memory, procedural memory, planning architectures
+- [Planning and Adaptive Reasoning](05-cognition-planning-memory/planning-and-adaptive-reasoning.md) - hierarchical planning, adaptive replanning, meta-reasoning, plan verification
+- See also: [Reasoning Patterns](01-agent-architecture-and-design/reasoning-patterns.md), [Memory Management](01-agent-architecture-and-design/memory-management.md), [LangChain/LangGraph](02-agent-development/langchain.md) checkpointing
 
 ### 6. Knowledge Integration and Data Handling (10%)
 
 - [RAG and Tools](06-knowledge-integration-data/rag-and-tools.md) - embeddings, routers, chunking, retrieval methods, vector DBs, evaluation, advanced RAG patterns
+- [Vector DB Optimization](06-knowledge-integration-data/vector-db-optimization.md) - HNSW, IVF indexing, GPU-accelerated search, Milvus scaling strategies
+- [ETL and Data Quality](06-knowledge-integration-data/etl-and-data-quality.md) - ETL pipelines, NeMo Curator, data validation, deduplication, quality metrics
+- [Real-Time Knowledge Access](06-knowledge-integration-data/real-time-knowledge-access.md) - SQL agents, API agents, streaming data integration, live knowledge retrieval
 
 ### 7. NVIDIA Platform Implementation (7%)
 
 - [NIMs](07-nvidia-platform-implementation/nims.md) - NVIDIA Inference Microservices
 - [NeMo](07-nvidia-platform-implementation/nemo.md) - large language models
 - [NeMo Agent Toolkit](07-nvidia-platform-implementation/nemo-agent-toolkit.md)
+- [NeMo Guardrails](07-nvidia-platform-implementation/nemo-guardrails.md) - Colang 2.0, rail types (input/output/topical/retrieval), NIM integration, programmable safety
 - [AIQ Toolkit](07-nvidia-platform-implementation/aiq-toolkit.md)
+- [NIMs and NeMo Integration](07-nvidia-platform-implementation/nims-and-nemo.md) - combined NIM + NeMo workflows
 - [Platform Components](07-nvidia-platform-implementation/platform-components.md)
 - [Architecture Patterns](07-nvidia-platform-implementation/architecture-patterns.md)
 - [NVIDIA Role in Ecosystem](07-nvidia-platform-implementation/nvidia-role-in-ecosystem.md)
 
 ### 8. Run, Monitor, and Maintain (5%)
 
+- [Domain Overview](08-run-monitor-maintain/README.md) - monitoring, observability, and maintenance roadmap
 - [Throughput vs Latency](08-run-monitor-maintain/monitoring/throughput-vs-latency.md) - performance tradeoffs
-- [NIM vs NeMo](08-run-monitor-maintain/monitoring/nim-vs-nemo.md) - deployment and operation considerations
+- [Observability and Tracing](08-run-monitor-maintain/observability-and-tracing.md) - OpenTelemetry, Prometheus/Grafana, distributed tracing for agent systems
+- [Alerting and Maintenance](08-run-monitor-maintain/alerting-and-maintenance.md) - alert thresholds, deployment patterns, rollback strategies, runbook automation
 
 ### 9. Safety, Ethics, and Compliance (5%)
 
 - [Enterprise AI Factory](09-safety-ethics-compliance/enterprise-ai-factory.md) - governance and responsible AI
+- [Responsible AI and Auditing](09-safety-ethics-compliance/responsible-ai-and-auditing.md) - bias types, fairness audits, EU AI Act, compliance frameworks, red teaming
 
 ### 10. Human-AI Interaction and Oversight (5%)
 
 - [Human-AI Interaction Overview](10-human-ai-interaction/README.md) - human-in-the-loop patterns, oversight, safety guardrails, UX
-- See [Error Handling](01-agent-architecture-and-design/error-handling.md) for failure modes and recovery patterns
+- [Human-AI Oversight](10-human-ai-interaction/human-ai-oversight.md) - HITL workflows, escalation protocols, transparency and explainability, trust calibration, accessibility
+- See also: [Error Handling](01-agent-architecture-and-design/error-handling.md) for failure modes and recovery patterns, [Human-Agent UI Design](01-agent-architecture-and-design/human-agent-ui-design.md) for interface patterns
 
 ## Reference
 
