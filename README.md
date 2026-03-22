@@ -29,7 +29,7 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 | Domain | Weight | Study Resources |
 | --- | --- | --- |
 | **Agent Architecture and Design** | 15% | Agent Architecture Overview, 4-Layer Architecture, Reasoning Patterns, Stateful Orchestration, Multi-Agent Communication, Memory Management, Knowledge Graphs, Human-Agent UI Design |
-| **Agent Development** | 15% | LangChain, CrewAI, AutoGen, Code Examples |
+| **Agent Development** | 15% | LangChain, CrewAI, AutoGen, Prompt Engineering, Custom Tools & APIs, Multimodal Models, Streaming & Feedback, Decision-Making Evaluation |
 | **Evaluation and Tuning** | 13% | Evaluation and Tuning Techniques, Frameworks |
 | **Deployment and Scaling** | 13% | Triton, Enterprise Deployment Pattern, Platform Components |
 | **Cognition, Planning, and Memory** | 10% | Reasoning Patterns, Memory & State Management, LangGraph Checkpoints |
@@ -71,6 +71,10 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 - [CrewAI](02-agent-development/crewai.md) - role-based agent teams
 - [AutoGen](02-agent-development/autogen.md) - multi-agent conversations
 - [Prompt Engineering](02-agent-development/prompt-engineering.md) - zero-shot, few-shot, CoT, ReAct, tool use, prompt tuning, NIM templates
+- [Custom Tools and APIs](02-agent-development/custom-tools-and-apis.md) - building, connecting, and managing external tools for agents
+- [Multimodal Models](02-agent-development/multimodal-models.md) - integrating text, vision, and audio models into agent systems
+- [Streaming and Feedback](02-agent-development/streaming-and-feedback.md) - dynamic conversation flows, real-time streaming, feedback mechanisms
+- [Decision-Making Evaluation](02-agent-development/decision-making-evaluation.md) - assessing and refining agent decision-making
 
 ### 3. Evaluation and Tuning (13%)
 
