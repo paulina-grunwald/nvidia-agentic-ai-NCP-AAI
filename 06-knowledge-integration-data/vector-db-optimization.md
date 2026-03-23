@@ -1,11 +1,13 @@
 # Vector Database Optimization and Configuration
-**Objective 6.2: Configure and optimize vector databases for fast retrieval**
+
+**Configure and optimize vector databases for fast retrieval**
 
 Vector databases are the backbone of high-performance RAG systems. This guide covers indexing strategies, configuration tuning, and NVIDIA-accelerated approaches for production-scale knowledge retrieval.
 
 ## Indexing Algorithms: When to Use What
 
 ### HNSW (Hierarchical Navigable Small World)
+
 **Best for:** General-purpose similarity search with consistent performance requirements
 
 - Approximate nearest neighbor search using hierarchical layer structure
@@ -18,32 +20,14 @@ Vector databases are the backbone of high-performance RAG systems. This guide co
     - Higher M: better search quality but slower indexing
   - `ef`: Query-time parameter (higher = slower but better recall)
 
-```python
-# HNSW Configuration Example
-import milvus
-
-# Milvus with HNSW
-hnsw_params = {
-    "index_type": "HNSW",
-    "metric_type": "L2",  # or "IP" (inner product)
-    "params": {
-        "M": 32,              # Dense connections
-        "efConstruction": 360 # High-quality indexing
-    }
-}
-
-collection.create_index(
-    field_name="embeddings",
-    index_params=hnsw_params
-)
-```
-
 **Trade-offs:**
+
 - Query latency: 5-20ms (single vector)
 - Memory per vector: ~1.5-2x embedding size
 - Index build time: Moderate (slow for billions of vectors)
 
 ### IVF-Flat (Inverted File with Flat Quantization)
+
 **Best for:** High-throughput queries with tight memory constraints
 
 - Clusters vectors into `nlist` groups (inverted lists)
@@ -56,30 +40,15 @@ collection.create_index(
     - Lower nprobe: faster queries, lower recall
     - Higher nprobe: slower queries, better recall
 
-```python
-# IVF-Flat Configuration
-ivf_flat_params = {
-    "index_type": "IVF_FLAT",
-    "metric_type": "L2",
-    "params": {
-        "nlist": 256,      # 256 clusters
-        "nprobe": 16       # Search 16 clusters (6% of total)
-    }
-}
-
-collection.create_index(
-    field_name="embeddings",
-    index_params=ivf_flat_params
-)
-```
-
 **Trade-offs:**
+
 - Query latency: 10-50ms
 - Memory per vector: 1x embedding size
 - Index build time: Very fast
 - Recall: 70-85% (depends on nprobe)
 
 ### IVF-PQ (Inverted File with Product Quantization)
+
 **Best for:** Billion-scale vectors with memory constraints and offline batch queries
 
 - Combines IVF clustering with Product Quantization (PQ)
@@ -90,28 +59,15 @@ collection.create_index(
   - `m`: Number of PQ subvectors (typical 8-64, higher = better quality, higher memory)
   - `nbits`: Bits per PQ code (8 typical, 4 for extreme compression)
 
-```python
-# IVF-PQ for Billion-Scale Vector Storage
-ivf_pq_params = {
-    "index_type": "IVF_PQ",
-    "metric_type": "L2",
-    "params": {
-        "nlist": 2048,     # 2048 clusters for 1B vectors
-        "m": 8,            # 8 subvectors
-        "nbits": 8         # 8 bits per code
-    }
-}
-
-# Typically used with SQ8 post-processing for fine-tuning
-```
-
 **Trade-offs:**
+
 - Query latency: 50-200ms (acceptable for batch processing)
 - Memory per vector: 0.1x embedding size (dramatic compression)
 - Index build time: Slow but one-time cost
 - Recall: 60-75% (compression loss)
 
 ### Brute Force (Exact Search)
+
 **Best for:** Small datasets (<10M vectors), exact recall requirements, benchmarking
 
 - Linear scan, distance computed for every vector
@@ -126,6 +82,7 @@ brute_force_params = {
 ```
 
 **Trade-offs:**
+
 - Query latency: O(n) = milliseconds to seconds
 - Memory: Minimal overhead
 - Use only for ground truth or small corpora
@@ -145,6 +102,7 @@ Do you have < 100K vectors?
 ## GPU-Accelerated Search
 
 ### Milvus with GPU Support
+
 Milvus supports GPU acceleration for index building and search using NVIDIA CUDA.
 
 ```python
@@ -186,11 +144,13 @@ results = collection.search(
 ```
 
 **Performance Gains:**
+
 - Index building: 3-5x faster on GPU vs CPU
 - Query throughput: 10-100x improvement for batch queries
 - Latency: 1-5ms per query (vs 20-50ms on CPU)
 
 ### FAISS with GPU Acceleration
+
 Facebook AI Similarity Search (FAISS) provides optimized GPU kernels.
 
 ```python
@@ -236,23 +196,24 @@ indices, distances = gpu_search(gpu_index, queries, k=10)
 ```
 
 **FAISS GPU Benchmarks:**
+
 - 1M vectors, 768-dim: Index build 2-3 seconds
 - Batch query (1K queries): 50-100ms
 - Single query: 1-2ms
 
 ## Vector Database Comparison
 
-| Feature | Milvus | Pinecone | Weaviate | Qdrant | Chroma |
-|---------|--------|----------|----------|--------|--------|
-| **Scale** | 100B+ | 100B+ | 10B | 10B | 100M |
-| **GPU Support** | Yes (native) | Yes (backend) | No | No | No |
-| **Self-Hosted** | Yes | No | Yes | Yes | Yes |
-| **License** | Open (AGPL) | Proprietary | Open (AGPL) | Open (AGPL) | Open (Apache) |
-| **Cost (1B vectors)** | $100s | $1000s/mo | $100s | $100s | Free |
-| **Query Latency** | 5-10ms | 50-200ms | 20-50ms | 10-20ms | 1-10ms |
-| **Metadata Filtering** | Excellent | Good | Excellent | Good | Basic |
-| **Replication** | Built-in | Managed | Built-in | Built-in | File-based |
-| **Best For** | Enterprise RAG | Managed service | Knowledge graphs | Real-time | Dev/testing |
+| Feature                | Milvus         | Pinecone        | Weaviate         | Qdrant      | Chroma        |
+| ---------------------- | -------------- | --------------- | ---------------- | ----------- | ------------- |
+| **Scale**              | 100B+          | 100B+           | 10B              | 10B         | 100M          |
+| **GPU Support**        | Yes (native)   | Yes (backend)   | No               | No          | No            |
+| **Self-Hosted**        | Yes            | No              | Yes              | Yes         | Yes           |
+| **License**            | Open (AGPL)    | Proprietary     | Open (AGPL)      | Open (AGPL) | Open (Apache) |
+| **Cost (1B vectors)**  | $100s          | $1000s/mo       | $100s            | $100s       | Free          |
+| **Query Latency**      | 5-10ms         | 50-200ms        | 20-50ms          | 10-20ms     | 1-10ms        |
+| **Metadata Filtering** | Excellent      | Good            | Excellent        | Good        | Basic         |
+| **Replication**        | Built-in       | Managed         | Built-in         | Built-in    | File-based    |
+| **Best For**           | Enterprise RAG | Managed service | Knowledge graphs | Real-time   | Dev/testing   |
 
 ## Configuration Tuning for Performance
 
@@ -271,22 +232,23 @@ queryCoord:
 queryNode:
   cache:
     enable: true
-    memoryLimit: 3GB  # Cache for hot vectors
+    memoryLimit: 3GB # Cache for hot vectors
 
 indexCoord:
-  indexBuildParallel: 4  # Parallel index builds
+  indexBuildParallel: 4 # Parallel index builds
 
 # GPU configuration
 gpu:
   index:
     device_id: 0
     enable: true
-    memory_fraction: 0.7  # Use 70% of GPU memory
+    memory_fraction: 0.7 # Use 70% of GPU memory
 ```
 
 ### Index Selection by Scenario
 
 **Scenario 1: Real-time Finance Data (sub-10ms latency)**
+
 ```
 Index: HNSW
 Configuration:
@@ -298,6 +260,7 @@ Reason: Consistent low latency with good recall
 ```
 
 **Scenario 2: Enterprise Document RAG (50-100K docs)**
+
 ```
 Index: IVF-Flat
 Configuration:
@@ -309,6 +272,7 @@ Reason: Fast indexing, simple tuning, sufficient recall
 ```
 
 **Scenario 3: Billion-Scale Research Archive**
+
 ```
 Index: IVF-PQ
 Configuration:
@@ -322,6 +286,7 @@ Reason: Memory efficiency, acceptable batch latency
 ## Scaling Strategies
 
 ### Horizontal Scaling with Sharding
+
 ```python
 # Milvus sharding example
 collection.create_index(
@@ -342,11 +307,13 @@ partition_keys = ["user_id", "document_source"]
 ```
 
 **Scaling Benefits:**
+
 - Distributes vectors across multiple nodes
 - Parallelizes indexing and search
 - Linear throughput scaling to 10K+ QPS
 
 ### Replication and High Availability
+
 ```python
 # Milvus replication setup
 replica_number = 3
@@ -387,11 +354,13 @@ Exact Recall (100%) + Slow Query (seconds)
 ## NVIDIA Integration Points
 
 **NVIDIA NIM for Vector Search:**
+
 - Deploy optimized vector search microservices
 - Leverages NVIDIA RAPIDS for GPU-accelerated ETL
 - Integrated with LLMs for end-to-end retrieval
 
 **NVIDIA RAPIDS:**
+
 - GPU-accelerated data preparation before indexing
 - CuML for embedding similarity computation
 - cuDF for metadata filtering at scale
