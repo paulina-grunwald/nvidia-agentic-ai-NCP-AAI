@@ -31,10 +31,10 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 | **Agent Architecture and Design** | 15% | Agent Architecture Overview, 4-Layer Architecture, Reasoning Patterns, Stateful Orchestration, Multi-Agent Communication, Memory Management, Knowledge Graphs, Human-Agent UI Design |
 | **Agent Development** | 15% | LangChain, CrewAI, AutoGen, Prompt Engineering, Custom Tools & APIs, Multimodal Models, Streaming & Feedback, Decision-Making Evaluation |
 | **Evaluation and Tuning** | 13% | Evaluation Techniques, Pipelines, Benchmarking, Parameter Tuning, User Feedback, Optimization |
-| **Deployment and Scaling** | 13% | Triton, Enterprise Deployment, Containerization & K8s, MLOps & CI/CD |
+| **Deployment and Scaling** | 13% | Triton, Enterprise Deployment, Containerization & K8s, MLOps & CI/CD, GPU Hardware & MIG |
 | **Cognition, Planning, and Memory** | 10% | Memory & Planning, Adaptive Reasoning, Reasoning Patterns, LangGraph Checkpoints |
 | **Knowledge Integration and Data Handling** | 10% | RAG and Tools, Vector DB Optimization, ETL & Data Quality, Real-Time Knowledge Access |
-| **NVIDIA Platform Implementation** | 7% | NIMs, NeMo, NeMo Guardrails, AIQ Toolkit, Architecture Patterns |
+| **NVIDIA Platform Implementation** | 7% | NIMs, NeMo, TensorRT-LLM, NeMo Guardrails, AIQ Toolkit, NeMo Curator, NeMo Aligner/RLHF, RAPIDS, Component Decision Guide, Exam Decision Rules |
 | **Run, Monitor, and Maintain** | 5% | Observability & Tracing, Alerting & Maintenance, Throughput vs Latency |
 | **Safety, Ethics, and Compliance** | 5% | Enterprise AI Factory, Responsible AI & Auditing, Bias Detection, Compliance |
 | **Human-AI Interaction and Oversight** | 5% | HITL Workflows, Escalation Protocols, Transparency, Human-Agent UI Design |
@@ -99,6 +99,9 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 - [Containerization and Scaling](04-deployment-and-scaling/containerization-scaling.md) - Docker, Kubernetes patterns, HPA, load balancing, GPU scheduling, cost optimization
 - [MLOps and CI/CD](04-deployment-and-scaling/mlops-cicd.md) - CI/CD pipelines, artifact versioning, A/B and canary deployments, rollback strategies
 
+**GPU Hardware & Optimization:**
+- [GPU Hardware and MIG](04-deployment-and-scaling/gpu-hardware-mig.md) - A100 vs H100, MIG partitioning, Nemotron variants, profiling tools (Nsight/DCGM/Model Analyzer), confidential computing
+
 ### 5. Cognition, Planning, and Memory (10%)
 
 - [Memory and Planning](05-cognition-planning-memory/memory-and-planning.md) - working memory, episodic memory, procedural memory, planning architectures
@@ -114,11 +117,20 @@ The NCP-AAI exam covers **10 weighted domains** across 60–70 questions (120-mi
 
 ### 7. NVIDIA Platform Implementation (7%)
 
+**Core Components:**
 - [NIMs](07-nvidia-platform-implementation/nims.md) - NVIDIA Inference Microservices
-- [NeMo](07-nvidia-platform-implementation/nemo.md) - large language models
-- [NeMo Agent Toolkit](07-nvidia-platform-implementation/nemo-agent-toolkit.md)
+- [NeMo](07-nvidia-platform-implementation/nemo.md) - large language models, fine-tuning
+- [TensorRT-LLM](07-nvidia-platform-implementation/tensorrt-llm.md) - inference optimization, mixed precision, kernel fusion, in-flight batching, latency vs throughput
 - [NeMo Guardrails](07-nvidia-platform-implementation/nemo-guardrails.md) - Colang 2.0, rail types (input/output/topical/retrieval), NIM integration, programmable safety
+- [NeMo Agent Toolkit](07-nvidia-platform-implementation/nemo-agent-toolkit.md)
 - [AIQ Toolkit](07-nvidia-platform-implementation/aiq-toolkit.md)
+- [NeMo Curator](07-nvidia-platform-implementation/nemo-curator.md) - GPU-accelerated data prep, dedup, PII redaction, quality filtering
+- [NeMo Aligner and RLHF](07-nvidia-platform-implementation/nemo-aligner-rlhf.md) - RLHF pipeline, reward models, PPO, DPO alignment
+- [RAPIDS and cuGraph](07-nvidia-platform-implementation/rapids-cugraph.md) - GPU-accelerated data science, knowledge graph analytics
+
+**Architecture & Decision Guides:**
+- [NVIDIA Component Decision Guide](07-nvidia-platform-implementation/nvidia-component-decision-guide.md) - which tool for which job, keyword triggers, common exam traps
+- [Exam Decision Rules](07-nvidia-platform-implementation/exam-decision-rules.md) - compliance patterns, Slurm vs K8s, framework traps, HITL rules, CoT special cases
 - [NIMs and NeMo Integration](07-nvidia-platform-implementation/nims-and-nemo.md) - combined NIM + NeMo workflows
 - [Platform Components](07-nvidia-platform-implementation/platform-components.md)
 - [Architecture Patterns](07-nvidia-platform-implementation/architecture-patterns.md)
