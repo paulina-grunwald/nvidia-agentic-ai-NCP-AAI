@@ -1,5 +1,6 @@
 # ETL Pipelines and Data Quality for Agent Knowledge Bases
-**Objectives 6.3 & 6.4: Build ETL pipelines and conduct data quality checks, augmentation, and preprocessing**
+
+**Build ETL pipelines and conduct data quality checks, augmentation, and preprocessing**
 
 ETL (Extract, Transform, Load) is critical for turning raw data into reliable knowledge for agents. This guide covers ingestion, transformation, quality assurance, and augmentation at scale.
 

@@ -3,7 +3,7 @@
 ## Embeddings
 
 - Embeddings - a high-dimensional data as vectors in a lower-dimensional space. This matters because once words are vectors, we can mathematically measure how similar they are (using dot product or cosine similarity).
-- For example, words like "cat" and "dog" can be represented as vectors that are close to each other in the vector space, reflecting their semantic similarity. This is in contrast to one-hot encoding, where each word is represented as a sparse binary vector, which fails to capture any semantic relationships.
+- For example, words like "cat" and "dog" can be represented as vectors that are close to each other in the vector space, reflecting their semantic similarity. This is in contrast to one-shot encoding, where each word is represented as a sparse binary vector, which fails to capture any semantic relationships.
 
 ## Embedding Models
 
