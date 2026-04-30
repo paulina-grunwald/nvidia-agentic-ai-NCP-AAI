@@ -4,7 +4,7 @@ Comprehensive exam notes and study resources for the [NVIDIA Agentic AI Professi
 
 ## About This Repository
 
-This repository consolidates knowledge and best practices for building production-grade agentic AI systems on NVIDIA's platform. It covers foundational concepts through advanced enterprise deployment patterns, with emphasis on NVIDIA-specific technologies like NIMs, NeMo, Triton, and NeMo Agents.
+This repository consolidates knowledge and best practices for building production-grade agentic AI systems on NVIDIA's platform. It covers foundational concepts through advanced enterprise deployment patterns, with emphasis on NVIDIA - specific technologies like NIMs, NeMo, Triton, and NeMo Agents.
 
 **Who should use this?**
 - Developers and architects preparing for the NCP-AAI certification
